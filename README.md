@@ -58,33 +58,33 @@ Winner is marked in **bold**.
 -- ##
 -- ## BASELINE
 -- ##
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'BigTable' AND TABLE_SCHEMA = 'TestPerfSchema')
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'LargerTable' AND TABLE_SCHEMA = 'TestPerformance')
 BEGIN
- DROP TABLE TestPerfSchema.BigTable
+ DROP TABLE TestPerformance.LargerTable
 END
 GO
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'SmallerTable' AND TABLE_SCHEMA = 'TestPerfSchema')
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'SmallerTable' AND TABLE_SCHEMA = 'TestPerformance')
 BEGIN
- DROP TABLE TestPerfSchema.SmallerTable
+ DROP TABLE TestPerformance.SmallerTable
 END
 GO
 
-IF EXISTS (SELECT * FROM sys.schemas WHERE name = 'TestPerfSchema')
+IF EXISTS (SELECT * FROM sys.schemas WHERE name = 'TestPerformance')
 BEGIN
- DROP SCHEMA TestPerfSchema 
+ DROP SCHEMA TestPerformance 
 END
 GO
 
-CREATE SCHEMA TestPerfSchema
+CREATE SCHEMA TestPerformance
 GO
 
-CREATE TABLE TestPerfSchema.BigTable (
+CREATE TABLE TestPerformance.LargerTable (
 	Id INT IDENTITY PRIMARY KEY,
-	SomeColumn CHAR(4) NOT NULL,
+	CompareColumn CHAR(4) NOT NULL,
 )
  
-CREATE TABLE TestPerfSchema.SmallerTable (
+CREATE TABLE TestPerformance.SmallerTable (
 	Id INT IDENTITY PRIMARY KEY,
 	LookupColumn CHAR(4) NOT NULL,
 )
@@ -93,7 +93,7 @@ CREATE TABLE TestPerfSchema.SmallerTable (
 -- ## INSERT DATA
 -- ##
 INSERT INTO 
- TestPerfSchema.BigTable (SomeColumn)
+ TestPerformance.LargerTable (CompareColumn)
 	SELECT TOP 
   250000
 	CHAR(65+FLOOR(RAND(a.column_id *5645 + b.object_id)*10)) + CHAR(65+FLOOR(RAND(b.column_id *3784 + b.object_id)*12)) +
@@ -103,26 +103,25 @@ INSERT INTO
   CROSS JOIN 
   master.sys.columns AS b
  
-INSERT INTO TestPerfSchema.SmallerTable (LookupColumn)
-	SELECT DISTINCT SomeColumn
-	FROM TestPerfSchema.BigTable TABLESAMPLE (25 PERCENT)
-
+INSERT INTO TestPerformance.SmallerTable (LookupColumn)
+	SELECT DISTINCT CompareColumn
+	FROM TestPerformance.LargerTable TABLESAMPLE (25 PERCENT)
 
 -- ##
 -- ## NO INDEX
 -- ##
 
-
 SET STATISTICS TIME ON
 PRINT 'LEFT OUTER JOIN  - NO INDEX'
+
 SELECT 
  bt.id
- , bt.SomeColumn
+ , bt.CompareColumn
 FROM 
- TestPerfSchema.BigTable AS bt
+ TestPerformance.LargerTable AS bt
  LEFT OUTER JOIN 
- TestPerfSchema.SmallerTable AS st
-	 ON bt.SomeColumn = st.LookupColumn
+ TestPerformance.SmallerTable AS st
+	 ON bt.CompareColumn = st.LookupColumn
 WHERE 
  LookupColumn IS NULL
 SET STATISTICS TIME OFF
@@ -132,16 +131,16 @@ SET STATISTICS TIME ON
 PRINT 'NOT EXISTS  - NO INDEX'
 SELECT 
  bt.Id
- , bt.SomeColumn
+ , bt.CompareColumn
 FROM 
- TestPerfSchema.BigTable AS bt
+ TestPerformance.LargerTable AS bt
 WHERE NOT EXISTS (
-  SELECT 
-    1
-  FROM 
-    TestPerfSchema.SmallerTable AS st
-  WHERE 
-    st.LookupColumn = bt.SomeColumn
+	SELECT 
+  1
+	FROM 
+  TestPerformance.SmallerTable AS st
+	WHERE 
+  st.LookupColumn = bt.CompareColumn
 )
 SET STATISTICS TIME OFF
 
@@ -149,20 +148,20 @@ SET STATISTICS TIME OFF
 -- ##
 -- ## CREATE INDEX
 -- ##
-CREATE INDEX idx_BigTable_SomeColumn ON TestPerfSchema.BigTable (SomeColumn)
-CREATE INDEX idx_SmallerTable_LookupColumn ON TestPerfSchema.SmallerTable (LookupColumn)
+CREATE INDEX idx_LargerTable_CompareColumn ON TestPerformance.LargerTable (CompareColumn)
+CREATE INDEX idx_SmallerTable_LookupColumn ON TestPerformance.SmallerTable (LookupColumn)
 
 
 SET STATISTICS TIME ON
 PRINT 'LEFT OUTER JOIN  - INDEX'
 SELECT 
  bt.Id
- , bt.SomeColumn
+ , bt.CompareColumn
 FROM 
- TestPerfSchema.BigTable AS bt
+ TestPerformance.LargerTable AS bt
  LEFT OUTER JOIN 
- TestPerfSchema.SmallerTable AS st
-	 ON bt.SomeColumn = st.LookupColumn
+ TestPerformance.SmallerTable AS st
+	 ON bt.CompareColumn = st.LookupColumn
 WHERE 
  LookupColumn IS NULL
 SET STATISTICS TIME OFF
@@ -172,18 +171,19 @@ SET STATISTICS TIME ON
 PRINT 'NOT EXISTS  - INDEX'
 SELECT 
  bt.id
- , bt.SomeColumn
+ , bt.CompareColumn
 FROM 
- TestPerfSchema.BigTable AS bt
+ TestPerformance.LargerTable AS bt
 WHERE NOT EXISTS (
-  SELECT 
-    1
-  FROM 
-    TestPerfSchema.SmallerTable AS st
-  WHERE 
-    st.LookupColumn = bt.SomeColumn
+	SELECT 
+  1
+	FROM 
+  TestPerformance.SmallerTable AS st
+	WHERE 
+  st.LookupColumn = bt.CompareColumn
 )
 SET STATISTICS TIME OFF
+
 
 ```
 
