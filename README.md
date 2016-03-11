@@ -14,6 +14,8 @@ It compares LEFT OUTER JOIN with NULL including, versus NOT EXISTS, with index a
 
 Winner is marked in **bold**.
 
+### Run 1
+
 | Type            | Index | CPU Time (ms) | Elapsed Time (ms) |
 |-----------------|-------|---------------|-------------------|
 | LEFT OUTER JOIN | No    | 78            | 138               |
