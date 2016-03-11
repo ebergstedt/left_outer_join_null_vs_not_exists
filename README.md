@@ -2,7 +2,7 @@
 
 # About
 
-This document outlines a performance benchmark on selecting all values from a larger table, filtered by a smaller table, where no joined values exists.
+This document outlines a performance benchmark on selecting all values from a larger table, joined by a smaller table, where no joined values exists.
 
 It compares LEFT OUTER JOIN with NULL including, versus NOT EXISTS, with index and no index on the joined column for both tables.
 
