@@ -6,6 +6,8 @@ This document outlines a performance benchmark on selecting all values from a la
 
 It compares LEFT OUTER JOIN with NULL including, versus NOT EXISTS, with index and no index on the joined column for both tables.
 
+Scroll down to the bottom for the script details.
+
 # Specs
 
 **Database**: SQL Server 2012 R2
