@@ -88,7 +88,6 @@ INSERT INTO TestPerfSchema.SmallerTable (LookupColumn)
 
 SET STATISTICS TIME ON
 PRINT 'LEFT OUTER JOIN  - NO INDEX'
-
 SELECT 
  bt.id
  , bt.SomeColumn
