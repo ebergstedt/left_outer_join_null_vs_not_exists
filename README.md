@@ -14,12 +14,12 @@ It compares LEFT OUTER JOIN with NULL including, versus NOT EXISTS, with index a
 
 Winner is marked in **bold**.
 
-| Type            | Index | CPU Time (ms) | Elapsed Time (ms) |   |
-|-----------------|-------|---------------|-------------------|---|
-| LEFT OUTER JOIN | No    | 78            | 138               |   |
-| NOT EXISTS      | No    | 62            | 86                |   |
-| LEFT OUTER JOIN | Yes   | 78            | 119               |   |
-| NOT EXISTS      | Yes   | **32**            | **38**                |   |
+| Type            | Index | CPU Time (ms) | Elapsed Time (ms) |
+|-----------------|-------|---------------|-------------------|
+| LEFT OUTER JOIN | No    | 78            | 138               |
+| NOT EXISTS      | No    | 62            | 86                |
+| LEFT OUTER JOIN | Yes   | 78            | 119               |
+| NOT EXISTS      | Yes   | **32**        | **38**            |
 
 # Script
 
