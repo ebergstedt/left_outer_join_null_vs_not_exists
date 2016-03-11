@@ -135,11 +135,11 @@ SELECT
 FROM 
  TestPerformance.LargerTable AS bt
 WHERE NOT EXISTS (
-	SELECT 
+ SELECT 
   1
-	FROM 
+ FROM 
   TestPerformance.SmallerTable AS st
-	WHERE 
+ WHERE 
   st.LookupColumn = bt.CompareColumn
 )
 SET STATISTICS TIME OFF
@@ -175,11 +175,11 @@ SELECT
 FROM 
  TestPerformance.LargerTable AS bt
 WHERE NOT EXISTS (
-	SELECT 
+ SELECT 
   1
-	FROM 
+ FROM 
   TestPerformance.SmallerTable AS st
-	WHERE 
+ WHERE 
   st.LookupColumn = bt.CompareColumn
 )
 SET STATISTICS TIME OFF
