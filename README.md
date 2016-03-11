@@ -40,7 +40,7 @@ Winner is marked in **bold**.
 
 ```sql
 -- ##
--- ## LEFT JOIN [...] NULL 
+-- ## LEFT OUTER JOIN [...] NULL 
 -- ## vs
 -- ## NOT EXISTS
 -- ##
