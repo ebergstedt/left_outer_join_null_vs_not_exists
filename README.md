@@ -25,12 +25,12 @@ Winner is marked in **bold**.
 
 ### Run 2
 
-| Type            | Index | CPU Time (ms) | Elapsed Time (ms) |   |
-|-----------------|-------|---------------|-------------------|---|
-| LEFT OUTER JOIN | No    | 78            | 158               |   |
-| NOT EXISTS      | No    | 63            | 102               |   |
-| LEFT OUTER JOIN | Yes   | 62            | 147               |   |
-| NOT EXISTS      | Yes   | **47**            | **61**                |   |
+| Type            | Index | CPU Time (ms) | Elapsed Time (ms) |
+|-----------------|-------|---------------|-------------------|
+| LEFT OUTER JOIN | No    | 78            | 158               |
+| NOT EXISTS      | No    | 63            | 102               |
+| LEFT OUTER JOIN | Yes   | 62            | 147               |
+| NOT EXISTS      | Yes   | **47**            | **61**                |
 
 ### Run 3
 
