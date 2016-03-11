@@ -1,4 +1,4 @@
-# SQL Server performance - Get all NULL join values - LEFT OUTER JOIN .. NULL vs NOT EXISTS
+# SQL Server performance - Inverted INNER JOIN - LEFT OUTER JOIN .. NULL vs NOT EXISTS
 
 # About
 
