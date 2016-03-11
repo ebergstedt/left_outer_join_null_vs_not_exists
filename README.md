@@ -34,6 +34,12 @@ Winner is marked in **bold**.
 
 ### Run 3
 
+| Type            | Index | CPU Time (ms) | Elapsed Time (ms) |
+|-----------------|-------|---------------|-------------------|
+| LEFT OUTER JOIN | No    | 78            | 135               |
+| NOT EXISTS      | No    | 62            | 78                |
+| LEFT OUTER JOIN | Yes   | 78            | 128               |
+| NOT EXISTS      | Yes   | **31**            | **42**                |
 
 
 # Script
