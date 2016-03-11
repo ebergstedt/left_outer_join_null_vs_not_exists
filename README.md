@@ -82,9 +82,11 @@ INSERT INTO TestPerfSchema.SmallerTable (LookupColumn)
 	SELECT DISTINCT SomeColumn
 	FROM TestPerfSchema.BigTable TABLESAMPLE (25 PERCENT)
 
+
 -- ##
 -- ## NO INDEX
 -- ##
+
 
 SET STATISTICS TIME ON
 PRINT 'LEFT OUTER JOIN  - NO INDEX'
