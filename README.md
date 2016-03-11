@@ -186,3 +186,7 @@ WHERE NOT EXISTS (
 SET STATISTICS TIME OFF
 
 ```
+
+# Credits
+
+http://sqlinthewild.co.za/index.php/2010/03/23/left-outer-join-vs-not-exists/
