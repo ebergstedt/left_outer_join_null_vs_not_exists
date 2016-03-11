@@ -45,6 +45,9 @@ Winner is marked in **bold**.
 | LEFT OUTER JOIN | Yes   | 78            | 128               |
 | NOT EXISTS      | Yes   | **31**            | **42**                |
 
+# Conclusion
+
+Use NOT EXISTS always.
 
 # Script
 
