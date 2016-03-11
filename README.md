@@ -10,6 +10,10 @@ It compares LEFT OUTER JOIN with NULL including, versus NOT EXISTS, with index a
 
 Scroll down to the bottom for the script details.
 
+# Comparision index
+* **[NOT IN vs NOT EXISTS](https://github.com/ebergstedt/sql_performance_not_in_vs_not_exists)**
+* **[Inverted INNER JOIN - LEFT OUTER JOIN .. NULL vs NOT EXISTS](https://github.com/ebergstedt/sql_performance_left_outer_join_null_vs_not_exists)**
+
 # Specs
 
 **Database**: SQL Server 2012 R2
