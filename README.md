@@ -1,4 +1,4 @@
-# SQL Server performance - Inverted INNER JOIN - LEFT OUTER JOIN .. NULL vs NOT EXISTS
+# SQL Server performance - ANTI JOIN - LEFT OUTER JOIN .. NULL vs NOT EXISTS
 
 # About
 
@@ -27,7 +27,7 @@ Winner is marked in **bold**.
 | Type            | Index | CPU Time (ms) | Elapsed Time (ms) |
 |-----------------|-------|---------------|-------------------|
 | LEFT OUTER JOIN | No    | 78            | 138               |
-| NOT EXISTS      | No    | 62            | 86                |
+| NOT EXISTS      | No    | **62**            | **86**                |
 | LEFT OUTER JOIN | Yes   | 78            | 119               |
 | NOT EXISTS      | Yes   | **32**        | **38**            |
 
@@ -36,7 +36,7 @@ Winner is marked in **bold**.
 | Type            | Index | CPU Time (ms) | Elapsed Time (ms) |
 |-----------------|-------|---------------|-------------------|
 | LEFT OUTER JOIN | No    | 78            | 158               |
-| NOT EXISTS      | No    | 63            | 102               |
+| NOT EXISTS      | No    | **63**            | **102**               |
 | LEFT OUTER JOIN | Yes   | 62            | 147               |
 | NOT EXISTS      | Yes   | **47**            | **61**                |
 
@@ -45,13 +45,15 @@ Winner is marked in **bold**.
 | Type            | Index | CPU Time (ms) | Elapsed Time (ms) |
 |-----------------|-------|---------------|-------------------|
 | LEFT OUTER JOIN | No    | 78            | 135               |
-| NOT EXISTS      | No    | 62            | 78                |
+| NOT EXISTS      | No    | **62**            | **78**                |
 | LEFT OUTER JOIN | Yes   | 78            | 128               |
 | NOT EXISTS      | Yes   | **31**            | **42**                |
 
 # Conclusion
 
-Use NOT EXISTS always.
+(Given this code and database)
+
+Use NOT EXISTS, whether an index exists or not.
 
 # Script
 
